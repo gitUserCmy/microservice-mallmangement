@@ -1,0 +1,26 @@
+server:
+  port: 8051  # 服务端口
+eureka:
+  instance:
+    prefer-ip-address: true #是否显示主机IP
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/  #注册中心地址
+spring:
+  application:
+    name: gateway-zuul #指定应用名称
+
+    # API 网关服务的路由配置，访问路径：http://localhost:8020/microservice-eureka-order/order/1 ，同样可以调用订单信息。
+zuul:
+  routes:
+    order-service:  # zuul 的唯一标识  对应order microservice 中的spring.application.name
+      path: /order-service/**   #映射的路径，应用运行时，所以符合映射路径的url 都会被转发到microservice-eureka-order中
+      serviceId: order-service  # Eureka 中的serviceId, order中的spring.application.name
+    user-service:   # zuul 的唯一标识
+      path: /user-service/**
+      serviceId: user-service
+
+
+
+
+

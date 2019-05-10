@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: user-service  # 指定应用名称
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    name: microservice_mallmangement
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/${spring.datasource.name}?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8
+    # 正式环境 结合docker 容器使用
+    # url: jdbc:mysql://mysql:3306/${spring.datasource.name}?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update   #每次运行程序，没有表格会新建表格，表内有数据不会清空，只会更新
+#      naming:
+#        strategy: org.hibernate.cfg.ImprovedNamingStrategy   #表中字段命名策略,这里要引入hibernate的核心包，不然这个命名策略会报错
+#    database: MYSQL
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL5Dialect   #配置数据库方言
+server:
+  port: 8030
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+      #  defaultZone: http://localhost:8760/eureka/   默认使用
+  instance:
+    prefer-ip-address: true  #优选通过IP地址找到对应的服务名称
+# 客户端动态访问常量配置  如果根据服务名称调用，则不需要端口号
+ORDERSERVICEURL: http://order-service/

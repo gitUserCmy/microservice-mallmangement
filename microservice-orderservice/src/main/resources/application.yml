@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: order-service
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    name: microservice_mallmangement
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/${spring.datasource.name}?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8
+server:
+  port: 8005
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+
+
